@@ -6,6 +6,7 @@ const passport = require("passport");
 
 const userRoute = require("./routes/v1/user");
 const coursesRoute = require("./routes/v1/courses");
+const lecturerRoute = require("./routes/v1/lecturer");
 
 dotenv.config();
 const app = express();
@@ -15,6 +16,7 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 app.use("/api/user", userRoute);
+app.use("/api/lecturers", lecturerRoute);
 app.use("/api/courses", coursesRoute);
 
 // Server static assets if in production

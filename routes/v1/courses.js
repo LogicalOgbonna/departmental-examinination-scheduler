@@ -1,36 +1,48 @@
 const router = require("express").Router();
 const Courses = require("../../models/Courses");
+const Lecturers = require("../../models/Lecturer");
 
 router.post("/", (req, res, next) => {
-  // res.json(req.body);
-  Courses.find({}).then(course => {
-    if (course.length > 0) {
-      // req.body.map(data => {
-      //   Courses.course.push({ code: data.code, title: data.title });
-      // });
-
-      console.log(Courses.collection);
-
-      res.json({ data: Courses.model("course").courses });
-      // return Courses.save()
-      //   .then(data => res.json(data))
-      //   .catch(error =>
-      //     res.statusCode(401).json({ massage: "an error occured", error })
-      //   );
-    } else {
-      const newCourse = new Courses();
-      req.body.map(data => {
-        newCourse.courses.push({ code: data.code, title: data.title });
+  Courses.findOne({ code: req.body.code }).then(course => {
+    if (course && Object.keys(course).length) {
+      res.json({
+        course: `Coures with Course Code ${req.body.code} already exist`
       });
+    } else {
+      const course = {
+        code: req.body.code,
+        title: req.body.title,
+        numberOfStudents: req.body.number
+      };
+      const newCourse = new Courses(course);
       newCourse
         .save()
         .then(data => res.json(data))
-        .catch(error =>
-          res.statusCode(401).json({ message: "An error occured", error })
-        );
+        .catch(err => res.json(err));
     }
   });
-  // res.json("Working");
 });
 
+router.get("/", (req, res, next) => {
+  Courses.find({}).then(courses => {
+    if (courses.length) {
+      return res.json(courses);
+    } else {
+      return res.json({ courses: "No Lecturer Found" });
+    }
+  });
+});
+
+router.delete("/", (req, res, next) => {
+  console.log(req.body.id);
+  Courses.findByIdAndDelete(req.body.id).then(data => {
+    for (i = 0; i < data.lecturer.length; i++) {
+      Lecturers.find().then(lecturers => {
+        lecturers.courses.fileter(course => course.id !== req.body.id);
+      });
+    }
+
+    res.json(data);
+  });
+});
 module.exports = router;
