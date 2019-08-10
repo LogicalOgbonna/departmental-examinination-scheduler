@@ -14,7 +14,7 @@ export const CourseTable = props => {
           </tr>
         </thead>
         <tbody>
-          {props.courses.length > 0 ? (
+          {props.courses && props.courses.length > 0 ? (
             props.courses.map((course, index) => (
               <tr key={course._id}>
                 <th scope="row">{index + 1}</th>
