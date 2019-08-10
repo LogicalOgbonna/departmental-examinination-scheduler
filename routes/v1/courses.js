@@ -28,21 +28,30 @@ router.get("/", (req, res, next) => {
     if (courses.length) {
       return res.json(courses);
     } else {
-      return res.json({ courses: "No Lecturer Found" });
+      return res.json({ courses: "No Course Found" });
     }
   });
 });
 
-router.delete("/", (req, res, next) => {
-  console.log(req.body.id);
-  Courses.findByIdAndDelete(req.body.id).then(data => {
-    for (i = 0; i < data.lecturer.length; i++) {
+router.get("/:id", (req, res, next) => {
+  Courses.findById(req.params.id).then(courses => {
+    if (Object.keys(courses).length) {
+      return res.json(courses);
+    } else {
+      return res.json({ courses: `No Course with ID ${req.params.id} found` });
+    }
+  });
+});
+
+router.delete("/:id", (req, res, next) => {
+  Courses.findByIdAndDelete(req.params.id)
+    .then(data => {
+      console.log(data);
       Lecturers.find().then(lecturers => {
         lecturers.courses.fileter(course => course.id !== req.body.id);
       });
-    }
-
-    res.json(data);
-  });
+      res.json(data);
+    })
+    .catch(err => res.json(err));
 });
 module.exports = router;

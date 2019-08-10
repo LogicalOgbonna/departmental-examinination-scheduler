@@ -1,12 +1,12 @@
 import React from "react";
 import { Header, Footer, SideBar } from "../../components";
 
-export default function HomePage() {
+export default function Scheduler() {
   return (
     <div>
       <div className="container-fluid display-table">
         <div className="row display-table-row">
-          <SideBar page="home" />
+          <SideBar page="scheduler" />
           <div className="col-md-10 col-sm-11 display-table-cell v-align">
             <Header />
             <div className="user-dashboard">
@@ -58,37 +58,6 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-            </div>
-          
-          </div>
-        </div>
-      </div>
-      <div id="add_project" className="modal fade" role="dialog">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header login-header">
-              <button type="button" className="close" data-dismiss="modal">
-                &times;
-              </button>
-              <h4 className="modal-title">Add Project</h4>
-            </div>
-            <div className="modal-body">
-              <input type="text" placeholder="Project Title" name="name" />
-              <input type="text" placeholder="Post of Post" name="mail" />
-              <input type="text" placeholder="Author" name="passsword" />
-              <textarea placeholder="Desicrption" />
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="cancel" data-dismiss="modal">
-                Close
-              </button>
-              <button
-                type="button"
-                className="add-project"
-                data-dismiss="modal"
-              >
-                Save
-              </button>
             </div>
           </div>
         </div>
