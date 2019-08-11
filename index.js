@@ -9,9 +9,12 @@ const userRoute = require("./routes/v1/user");
 const coursesRoute = require("./routes/v1/courses");
 const lecturerRoute = require("./routes/v1/lecturer");
 const schedulerRoute = require("./routes/v1/scheduler");
+const cors = require("cors");
 
 dotenv.config();
 const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(passport.initialize());
