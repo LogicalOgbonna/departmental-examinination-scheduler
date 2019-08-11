@@ -50,7 +50,7 @@ class Course extends React.Component {
   }
   componentWillReceiveProps(next) {
     // if()
-    if (Object.keys(next.createdCourse).length > 0) {
+    if (next.createdCourse && Object.keys(next.createdCourse).length > 0) {
       this.props.clear();
       this.props.getCourses();
     }
@@ -68,13 +68,14 @@ class Course extends React.Component {
                 <h1>Courses</h1>
                 <div className="row">
                   <div className="col-md-5">
-                    {Object.keys(this.props.createdCourse).length > 0 && (
-                      <div className="form-group">
-                        <h3 className="text-success text-center">
-                          Course Added Sucessfully
-                        </h3>
-                      </div>
-                    )}
+                    {this.props.createdCourse &&
+                      Object.keys(this.props.createdCourse).length > 0 && (
+                        <div className="form-group">
+                          <h3 className="text-success text-center">
+                            Course Added Sucessfully
+                          </h3>
+                        </div>
+                      )}
                     <form onSubmit={this.onSubmit} className="form-group">
                       <div className="form-group">
                         <label htmlFor="title">Course Title:</label>

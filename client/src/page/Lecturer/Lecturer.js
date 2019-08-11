@@ -28,7 +28,7 @@ class Lecturer extends React.Component {
     this.props.getLecturers();
   }
   componentWillReceiveProps(next) {
-    if (Object.keys(next.createdLecturer).length > 0) {
+    if (next.createdLecturer && Object.keys(next.createdLecturer).length > 0) {
       this.props.clear();
       this.props.getLecturers();
     }
@@ -66,13 +66,14 @@ class Lecturer extends React.Component {
                 <h1>Lecturers</h1>
                 <div className="row">
                   <div className="col-md-4">
-                    {Object.keys(this.props.createdLecturer).length > 0 && (
-                      <div className="form-group">
-                        <h3 className="text-success text-center">
-                          Lecturer Added Sucessfully
-                        </h3>
-                      </div>
-                    )}
+                    {this.props.createdLecturer &&
+                      Object.keys(this.props.createdLecturer).length > 0 && (
+                        <div className="form-group">
+                          <h3 className="text-success text-center">
+                            Lecturer Added Sucessfully
+                          </h3>
+                        </div>
+                      )}
                     <form onSubmit={this.onSubmit} className="form-group">
                       <div className="form-group">
                         <label htmlFor="name">Lecturer Name:</label>

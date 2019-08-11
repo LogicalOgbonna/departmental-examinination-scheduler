@@ -46,10 +46,9 @@ router.get("/:id", (req, res, next) => {
 router.delete("/:id", (req, res, next) => {
   Courses.findByIdAndDelete(req.params.id)
     .then(data => {
-      console.log(data);
-      Lecturers.find().then(lecturers => {
-        lecturers.courses.fileter(course => course.id !== req.body.id);
-      });
+      // Lecturers.find().then(lecturers => {
+      //   lecturers.courses.fileter(course => course.id !== req.body.id);
+      // });
       res.json(data);
     })
     .catch(err => res.json(err));
