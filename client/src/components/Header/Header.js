@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import logo from "../images/onhs-eagles-png-logo-4.png";
 
 export default function Header() {
@@ -28,40 +27,40 @@ export default function Header() {
           <div className="header-rightside">
             <ul className="list-inline header-top pull-right">
               <li className="hidden-xs">
-                <Link
-                  to="#"
+                <a
+                  href="#"
                   className="add-project"
                   data-toggle="modal"
                   data-target="#add_project"
                 >
                   Add Project
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="#">
+                <a href="#">
                   <i className="fa fa-envelope" aria-hidden="true" />
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="#" className="icon-info">
+                <a href="#" className="icon-info">
                   <i className="fa fa-bell" aria-hidden="true" />
                   <span className="label label-primary">3</span>
-                </Link>
+                </a>
               </li>
               <li className="dropdown">
-                <Link to="#" className="dropdown-toggle" data-toggle="dropdown">
+                <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                   <img src={logo} alt="user" />
                   <b className="caret" />
-                </Link>
+                </a>
                 <ul className="dropdown-menu">
                   <li>
                     <div className="navbar-content">
                       <span>JS Krishna</span>
                       <p className="text-muted small">me@jskrishna.com</p>
                       <div className="divider" />
-                      <Link to="#" className="view btn-sm active">
+                      <a href="#" className="view btn-sm active">
                         View Profile
-                      </Link>
+                      </a>
                     </div>
                   </li>
                 </ul>

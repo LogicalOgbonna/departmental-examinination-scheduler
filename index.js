@@ -8,6 +8,7 @@ const path = require("path");
 const userRoute = require("./routes/v1/user");
 const coursesRoute = require("./routes/v1/courses");
 const lecturerRoute = require("./routes/v1/lecturer");
+const schedulerRoute = require("./routes/v1/scheduler");
 
 dotenv.config();
 const app = express();
@@ -19,6 +20,7 @@ require("./config/passport")(passport);
 app.use("/api/user", userRoute);
 app.use("/api/lecturers", lecturerRoute);
 app.use("/api/courses", coursesRoute);
+app.use("/api/scheduler", schedulerRoute);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {

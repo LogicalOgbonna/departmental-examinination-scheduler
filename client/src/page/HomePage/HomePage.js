@@ -5,12 +5,16 @@ import { Header, Footer, SideBar } from "../../components";
 import {
   getLecturers,
   viewLecturer,
-  deleteLecturer
+  deleteLecturer,
+  deleteLecturerCourse
 } from "../../actions/lecturer";
 import { CourseTable, LecturerTable } from "../../components/Table/Table";
 import { getCourses, viewCourse, deleteCourse } from "../../actions/courses";
-import { CourseModal } from "../../components/Modal/Modal";
+import { CourseModal, LecturerModal } from "../../components/Modal/Modal";
 class HomePage extends React.Component {
+  reload = () => {
+    this.props.getLecturers();
+  };
   componentDidMount() {
     this.props.getLecturers();
     this.props.getCourses();
@@ -44,7 +48,7 @@ class HomePage extends React.Component {
                     </div>
                     <div style={{ marginTop: "2%" }} className="center">
                       <LecturerTable
-                        deleteLecturer={this.props.deleteLecturer}
+                        deleteLecturerCourse={this.props.deleteLecturer}
                         viewLecturer={this.props.viewLecturer}
                         lecturers={this.props.lecturers}
                       />
@@ -56,6 +60,11 @@ class HomePage extends React.Component {
           </div>
         </div>
         <CourseModal course={this.props.singleCourse} />
+        <LecturerModal
+          lecturer={this.props.singleLecturer}
+          deleteLecturerCourse={this.props.deleteLecturerCourse}
+          reload={this.reload}
+        />
         <Footer />
       </div>
     );
@@ -79,6 +88,7 @@ export default connect(
     deleteCourse,
     getLecturers,
     viewLecturer,
-    deleteLecturer
+    deleteLecturer,
+    deleteLecturerCourse
   }
 )(HomePage);

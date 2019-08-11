@@ -11,7 +11,7 @@ export const CourseModal = props => {
                 <button type="button" className="close" data-dismiss="modal">
                   &times;
                 </button>
-                <h4 className="modal-title">{props.course.name}</h4>
+                <h4 className="modal-title">{props.course.title}</h4>
               </div>
 
               <div className="modal-body">

@@ -9,52 +9,52 @@ export default function SideBar({ page }) {
       id="navigation"
     >
       <div className="logo">
-        <Link to="home.html">
+        <a href="home.html">
           <img src={logo} alt="merkery_logo" className="hidden-xs hidden-sm" />
           <img
             src={logo}
             alt="merkery_logo"
             className="visible-xs visible-sm circle-logo"
           />
-        </Link>
+        </a>
       </div>
       <div className="navi">
         <ul>
           <li className={`${page === "home" ? "active" : ""}`}>
-            <Link to="/">
+            <a href="/">
               <i className="fa fa-home" aria-hidden="true" />
               <span className="hidden-xs hidden-sm">Home</span>
-            </Link>
+            </a>
           </li>
           <li className={`${page === "courses" ? "active" : ""}`}>
-            <Link to="/courses">
+            <a href="/courses">
               <i className="fa fa-tasks" aria-hidden="true" />
               <span className="hidden-xs hidden-sm">Courses</span>
-            </Link>
+            </a>
           </li>
           <li className={`${page === "lecturers" ? "active" : ""}`}>
-            <Link to="/lecturers">
+            <a href="/lecturers">
               <i className="fa fa-bar-chart" aria-hidden="true" />
               <span className="hidden-xs hidden-sm">Lecturers</span>
-            </Link>
+            </a>
           </li>
           <li className={`${page === "scheduler" ? "active" : ""}`}>
-            <Link to="/scheduler">
+            <a href="/scheduler">
               <i className="fa fa-user" aria-hidden="true" />
               <span className="hidden-xs hidden-sm">Scheduler</span>
-            </Link>
+            </a>
           </li>
           <li>
-            <Link to="#">
+            <a href="#">
               <i className="fa fa-calendar" aria-hidden="true" />
               <span className="hidden-xs hidden-sm">Users</span>
-            </Link>
+            </a>
           </li>
           <li>
-            <Link to="#">
+            <a href="#">
               <i className="fa fa-cog" aria-hidden="true" />
               <span className="hidden-xs hidden-sm">Setting</span>
-            </Link>
+            </a>
           </li>
         </ul>
       </div>

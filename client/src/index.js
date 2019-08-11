@@ -4,6 +4,8 @@ import { Provider } from "react-redux";
 import { Router, Route } from "react-router-dom";
 import history from "./utils/history";
 import store from "./store";
+// import "bootstrap";
+// import "jquery";
 
 import "./index.css";
 import App from "./App";
