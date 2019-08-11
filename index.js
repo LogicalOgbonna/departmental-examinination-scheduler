@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const passport = require("passport");
+const path = require("path");
 
 const userRoute = require("./routes/v1/user");
 const coursesRoute = require("./routes/v1/courses");
