@@ -18,7 +18,6 @@ router.post("/", (req, res, next) => {
             lecturer.courses.map(course => courseCode.push(course.code));
           }
           if (!courseCode.includes(req.body.code)) {
-            console.log(course);
             lecturer.courses.push({
               code: course.code,
               title: course.title,

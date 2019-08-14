@@ -40,7 +40,7 @@ export const errors = errors => ({
 
 export const getLecturers = () => dispatch => {
   axios
-    .get("/lecturers")
+    .get("http://localhost:7000/api/lecturers")
     .then(lecturers => {
       dispatch(allLecturers(lecturers.data));
     })

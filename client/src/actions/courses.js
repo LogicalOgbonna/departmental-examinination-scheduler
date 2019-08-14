@@ -34,7 +34,7 @@ export const errors = data => ({
 
 export const getCourses = () => dispatch => {
   axios
-    .get("/courses")
+    .get("http://localhost:7000/api/courses")
     .then(courses => {
       dispatch(allCourses(courses.data));
     })

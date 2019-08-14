@@ -9,6 +9,7 @@ const userRoute = require("./routes/v1/user");
 const coursesRoute = require("./routes/v1/courses");
 const lecturerRoute = require("./routes/v1/lecturer");
 const schedulerRoute = require("./routes/v1/scheduler");
+const settingsRoute = require("./routes/v1/settings");
 const cors = require("cors");
 
 dotenv.config();
@@ -24,6 +25,7 @@ app.use("/api/user", userRoute);
 app.use("/api/lecturers", lecturerRoute);
 app.use("/api/courses", coursesRoute);
 app.use("/api/scheduler", schedulerRoute);
+app.use("/api/settings", settingsRoute);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {

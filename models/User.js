@@ -5,7 +5,8 @@ const userSchema = mongooseSchema(
   {
     email: { type: String, required: true },
     admin: { type: Boolean, default: false },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+    timeTable: [{ type: Array }]
   },
   { timestamps: true }
 );

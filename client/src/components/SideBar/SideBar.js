@@ -40,18 +40,12 @@ export default function SideBar({ page }) {
           </li>
           <li className={`${page === "scheduler" ? "active" : ""}`}>
             <a href="/scheduler">
-              <i className="fa fa-user" aria-hidden="true" />
+              <i className="fa fa-calendar" aria-hidden="true" />
               <span className="hidden-xs hidden-sm">Scheduler</span>
             </a>
           </li>
-          <li>
-            <a href="#">
-              <i className="fa fa-calendar" aria-hidden="true" />
-              <span className="hidden-xs hidden-sm">Users</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
+          <li className={`${page === "settings" ? "active" : ""}`}>
+            <a href="/settings">
               <i className="fa fa-cog" aria-hidden="true" />
               <span className="hidden-xs hidden-sm">Setting</span>
             </a>

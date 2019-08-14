@@ -10,3 +10,11 @@ export const GET_COURSES = "GET_COURSES";
 export const POST_COURSES = "POST_COURSES";
 export const DELETE_COURSES = "DELETE_COURSES";
 export const VIEW_COURSE = "VIEW_COURSE";
+
+export const SETTINGS = "SETTINGS";
+export const GET_SETTINGS = "GET_SETTINGS";
+export const SETTINGS_ERROR = "SETTINGS_ERROR";
+
+export const GET_SCHEDULE = "GET_SCHEDULE";
+export const GET_DETAILS = "GET_DETAILS";
+export const SCHEDULER_ERROR = "SCHEDULER_ERROR";

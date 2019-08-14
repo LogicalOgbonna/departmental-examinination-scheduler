@@ -1,4 +1,5 @@
 import React from "react";
+import "./Table.css";
 
 export const CourseTable = props => {
   return (
@@ -57,7 +58,7 @@ export const CourseTable = props => {
 };
 
 export const LecturerTable = props => {
-  console.log(props)
+  console.log(props);
   return (
     <table className="table">
       <thead className="thead-dark">
@@ -111,4 +112,54 @@ export const LecturerTable = props => {
       </tbody>
     </table>
   );
+};
+
+export const ScheduleTabel = props => {
+  if (props.schedule.length) {
+    return (
+      <div style={{ marginTop: 20 }} className="mt-5 mb-5">
+        <table className="table">
+          <thead className="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Code</th>
+              <th scope="col">Title</th>
+              <th scope="col">Lecturers</th>
+              <th scope="col">No. of Students</th>
+              <th scope="col">Max No. of Invigilators </th>
+            </tr>
+          </thead>
+          <tbody>
+            {props.schedule && props.schedule.length > 0 ? (
+              props.schedule.map((schedule, index) => (
+                <tr key={schedule._id}>
+                  <th scope="row">{index + 1}</th>
+                  <td>{schedule.code}</td>
+                  <td>{schedule.title}</td>
+                  <td>
+                    {schedule.lecturer.map((lecturer, index) => (
+                      <p key={index} className="text-muted">
+                        {lecturer}
+                      </p>
+                    ))}
+                  </td>
+                  <td>{schedule.numberOfStudents}</td>
+                  <td>{schedule.numOfLecToInvigilate}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <th scope="row" />
+                <td />
+                <td />
+                <td />
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    );
+  } else {
+    return <div>Hey</div>;
+  }
 };

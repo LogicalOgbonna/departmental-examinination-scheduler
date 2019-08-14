@@ -26,16 +26,6 @@ export default function Header() {
         <div className="col-md-5">
           <div className="header-rightside">
             <ul className="list-inline header-top pull-right">
-              <li className="hidden-xs">
-                <a
-                  href="#"
-                  className="add-project"
-                  data-toggle="modal"
-                  data-target="#add_project"
-                >
-                  Add Project
-                </a>
-              </li>
               <li>
                 <a href="#">
                   <i className="fa fa-envelope" aria-hidden="true" />
