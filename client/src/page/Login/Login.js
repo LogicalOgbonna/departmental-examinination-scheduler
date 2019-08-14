@@ -1,7 +1,48 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import validator from "validator";
 
-export default class Login extends Component {
+import { login } from "../../actions/auth";
+
+class Login extends Component {
+  state = {
+    email: "",
+    password: "",
+    errors: {},
+    loading: false
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      const errors = {};
+      if (nextProps.errors.email) errors.email = nextProps.errors.email;
+      if (nextProps.errors.password) errors.email = nextProps.errors.password;
+      this.setState({ errors, loading: false });
+    }
+  }
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  validate = data => {
+    const errors = {};
+    if (!data.email) errors.email = "Can't be blank";
+    if (!data.password) errors.password = "Can't be blank";
+    if (!validator.isEmail(data.email)) errors.email = "Invalid email address";
+
+    return errors;
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    const errors = this.validate(this.state);
+    this.setState({ errors });
+    if (Object.keys(errors).length === 0) {
+      this.props.login(this.state);
+      this.setState({ loading: true });
+    }
+  };
   render() {
     return (
       <div>
@@ -9,9 +50,7 @@ export default class Login extends Component {
           <div className="row">
             <div className="col-md-4" />
             <div className="col-md-4 ">
-              <form
-              // onSubmit={this.onSubmit}
-              >
+              <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <label htmlFor="email">Email address</label>
                   <input
@@ -21,13 +60,13 @@ export default class Login extends Component {
                     id="email"
                     aria-describedby="emailHelp"
                     placeholder="Enter email"
-                    // onChange={this.onChange}
+                    onChange={this.onChange}
                   />
-                  {/* {this.state.errors && (
+                  {this.state.errors && (
                     <small id="emailHelp" className="form-text text-danger">
                       {this.state.errors.email}
                     </small>
-                  )} */}
+                  )}
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
@@ -37,13 +76,13 @@ export default class Login extends Component {
                     className="form-control"
                     id="password"
                     placeholder="Password"
-                    // onChange={this.onChange}
+                    onChange={this.onChange}
                   />
-                  {/* {this.state.errors && (
+                  {this.state.errors && (
                     <small id="emailHelp" className="form-text text-danger">
                       {this.state.errors.password}
                     </small>
-                  )} */}
+                  )}
                 </div>
                 <div className="row">
                   <div className="col-md-6">
@@ -57,12 +96,12 @@ export default class Login extends Component {
                   </div>
                   <div className="col-md-6">
                     <button
-                      // disabled={this.state.loading}
+                      disabled={this.state.loading}
                       type="submit"
                       className="btn btn-primary left"
                       // style={{ float: "left" }}
                     >
-                      {/* {this.state.loading ? "Wait ..." : "Register"} */}
+                      {this.state.loading ? "Wait ..." : "Register"}
                       Login
                     </button>
                   </div>
@@ -76,3 +115,12 @@ export default class Login extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  errors: state.user.authError
+});
+
+export default connect(
+  mapStateToProps,
+  { login }
+)(Login);

@@ -1,7 +1,11 @@
 import React from "react";
 import logo from "../images/onhs-eagles-png-logo-4.png";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-export default function Header() {
+import { logout } from "../../actions/auth";
+
+function Header() {
   return (
     <div className="row">
       <header>
@@ -43,15 +47,21 @@ export default function Header() {
                   <b className="caret" />
                 </a>
                 <ul className="dropdown-menu">
+                  {/* <li>
+                    <Link to="/profile" className="dropdown-item">
+                      <i className="fa fa-user" /> Profile
+                    </Link>
+                  </li>
+                   */}
                   <li>
-                    <div className="navbar-content">
-                      <span>JS Krishna</span>
-                      <p className="text-muted small">me@jskrishna.com</p>
-                      <div className="divider" />
-                      <a href="#" className="view btn-sm active">
-                        View Profile
-                      </a>
-                    </div>
+                    <button
+                      onClick={() => logout()}
+                      className="btn btn-secondary"
+                      // to="/login"
+                      className="dropdown-item"
+                    >
+                      <i className="fa fa-user-times" /> Logout
+                    </button>
                   </li>
                 </ul>
               </li>
@@ -62,3 +72,12 @@ export default function Header() {
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  user: state.user.user
+});
+
+export default connect(
+  mapStateToProps,
+  { logout }
+)(Header);

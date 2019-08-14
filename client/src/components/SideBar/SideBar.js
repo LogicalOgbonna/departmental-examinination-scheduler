@@ -21,7 +21,7 @@ export default function SideBar({ page }) {
       <div className="navi">
         <ul>
           <li className={`${page === "home" ? "active" : ""}`}>
-            <a href="/">
+            <a href="/dashboard">
               <i className="fa fa-home" aria-hidden="true" />
               <span className="hidden-xs hidden-sm">Home</span>
             </a>
