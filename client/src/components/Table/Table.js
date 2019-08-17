@@ -58,7 +58,6 @@ export const CourseTable = props => {
 };
 
 export const LecturerTable = props => {
-  console.log(props);
   return (
     <table className="table">
       <thead className="thead-dark">
@@ -115,7 +114,7 @@ export const LecturerTable = props => {
 };
 
 export const ScheduleTabel = props => {
-  if (props.schedule&&props.schedule.length) {
+  if (props.schedule && props.schedule.length) {
     return (
       <div style={{ marginTop: 20 }} className="mt-5 mb-5">
         <table className="table">

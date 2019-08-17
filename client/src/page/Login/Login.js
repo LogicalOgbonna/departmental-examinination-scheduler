@@ -101,8 +101,7 @@ class Login extends Component {
                       className="btn btn-primary left"
                       // style={{ float: "left" }}
                     >
-                      {this.state.loading ? "Wait ..." : "Register"}
-                      Login
+                      {this.state.loading ? "Wait ..." : "Login"}
                     </button>
                   </div>
                 </div>

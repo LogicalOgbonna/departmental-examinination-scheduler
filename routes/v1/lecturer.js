@@ -68,7 +68,7 @@ router.get("/", (req, res, next) => {
       if (lecturers.length) {
         return res.json(lecturers);
       } else {
-        return res.json({ lecturers: "No Lecturer Found" });
+        return res.json([]);
       }
     })
     .catch(err => res.json(err));

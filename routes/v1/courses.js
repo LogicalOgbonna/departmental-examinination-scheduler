@@ -28,7 +28,7 @@ router.get("/", (req, res, next) => {
     if (courses.length) {
       return res.json(courses);
     } else {
-      return res.json({ courses: "No Course Found" });
+      return res.json([]);
     }
   });
 });
