@@ -18,7 +18,7 @@ export const errors = error => ({
 
 export const getDetails = () => dispatch => {
   axios
-    .get("/scheduler")
+    .get("/api/scheduler")
     .then(detail => {
       dispatch(details(detail.data));
     })
@@ -27,7 +27,7 @@ export const getDetails = () => dispatch => {
 
 export const schedule = () => dispatch => {
   axios
-    .post("/scheduler")
+    .post("/api/scheduler")
     .then(sched => {
       const uniqueInvigilators = [];
       const invigilators = sched.data.invigilators;

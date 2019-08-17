@@ -34,7 +34,7 @@ export const errors = data => ({
 
 export const getCourses = () => dispatch => {
   axios
-    .get("http://localhost:7000/api/courses")
+    .get("/api/courses")
     .then(courses => {
       dispatch(allCourses(courses.data));
     })
@@ -43,7 +43,7 @@ export const getCourses = () => dispatch => {
 
 export const postCourses = data => dispatch => {
   axios
-    .post("/courses", data)
+    .post("/api/courses", data)
     .then(course => {
       console.log(course.data);
       dispatch(createdCourse(course.data));
@@ -54,7 +54,7 @@ export const postCourses = data => dispatch => {
 export const deleteCourse = data => dispatch => {
   if (window.confirm("Are you sure you want to delete this course?")) {
     axios
-      .delete(`/courses/${data}`)
+      .delete(`/api/courses/${data}`)
       .then(course => {
         dispatch(deletedCourse(course.data));
       })
@@ -65,7 +65,7 @@ export const deleteCourse = data => dispatch => {
 };
 
 export const viewCourse = id => dispatch => {
-  axios.get(`/courses/${id}`).then(course => {
+  axios.get(`/api/courses/${id}`).then(course => {
     console.log(course.data);
     dispatch(viewedCourse(course.data));
   });

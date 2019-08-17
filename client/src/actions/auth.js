@@ -33,12 +33,12 @@ export const errors = error => ({
 
 export const login = user => dispatch => {
   axios
-    .post("/user/auth/signin", user)
+    .post("/api/user/auth/signin", user)
     .then(user => {
       const token = user.data.token;
       localStorage.cost = JSON.stringify(token);
       const currentUser = jwtDecode(token);
-      axios.get(`/user/auth/current/${currentUser.id}`).then(user => {
+      axios.get(`/api/user/auth/current/${currentUser.id}`).then(user => {
         setAuthorizationHeader(token);
         dispatch(
           userLoggedIn({
@@ -59,12 +59,12 @@ export const login = user => dispatch => {
 
 export const register = user => dispatch => {
   axios
-    .post("/user/auth/signup", user)
+    .post("/api/user/auth/signup", user)
     .then(res => {
       const token = res.data.token;
       localStorage.cost = JSON.stringify(token);
       const currentUser = jwtDecode(token);
-      axios.get(`/user/auth/current/${currentUser.id}`).then(user => {
+      axios.get(`/api/user/auth/current/${currentUser.id}`).then(user => {
         setAuthorizationHeader(token);
         dispatch(
           userLoggedIn({

@@ -18,7 +18,7 @@ export const errors = error => ({
 
 export const setSetting = data => dispatch => {
   axios
-    .post("/settings", data)
+    .post("/api/settings", data)
     .then(setting => {
       console.log(setting.data);
       dispatch(settings(setting.data));
@@ -28,7 +28,7 @@ export const setSetting = data => dispatch => {
 
 export const getSetting = () => dispatch => {
   axios
-    .get("/settings")
+    .get("/api/settings")
     .then(setting => dispatch(gotSettings(setting.data)))
     .catch(err => dispatch(errors(err)));
 };

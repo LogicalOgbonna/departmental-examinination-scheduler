@@ -40,7 +40,7 @@ export const errors = errors => ({
 
 export const getLecturers = () => dispatch => {
   axios
-    .get("http://localhost:7000/api/lecturers")
+    .get("/api/lecturers")
     .then(lecturers => {
       dispatch(allLecturers(lecturers.data));
     })
@@ -50,7 +50,7 @@ export const getLecturers = () => dispatch => {
 export const postLecturers = data => dispatch => {
   console.log(data);
   axios
-    .post("/lecturers", data)
+    .post("/api/lecturers", data)
     .then(lecturer => {
       console.log(lecturer.data);
       dispatch(createdLecturer(lecturer.data));
@@ -61,7 +61,7 @@ export const postLecturers = data => dispatch => {
 export const deleteLecturer = data => dispatch => {
   if (window.confirm("Are you sure you want to delete this lecturer?")) {
     axios
-      .delete(`/lecturers/${data}`)
+      .delete(`/api/lecturers/${data}`)
       .then(lecturer => {
         console.log(lecturer.data);
         dispatch(deletedLecturer(lecturer.data));
@@ -73,7 +73,7 @@ export const deleteLecturer = data => dispatch => {
 };
 
 export const viewLecturer = id => dispatch => {
-  axios.get(`/lecturers/${id}`).then(lecturer => {
+  axios.get(`/api/lecturers/${id}`).then(lecturer => {
     dispatch(viewedLecturer(lecturer.data));
   });
 };
@@ -84,7 +84,7 @@ export const deleteLecturerCourse = (lec_id, cos_id) => dispatch => {
   //   cos_id
   // }
   console.log(cos_id);
-  axios.post("/lecturers/deleteCourse", { lec_id, cos_id }).then(res => {
+  axios.post("/api/lecturers/deleteCourse", { lec_id, cos_id }).then(res => {
     console.log(res.data);
     dispatch(deletedLecturerCourse(res.data));
   });
