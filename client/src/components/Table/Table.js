@@ -115,7 +115,7 @@ export const LecturerTable = props => {
 };
 
 export const ScheduleTabel = props => {
-  if (props.schedule.length) {
+  if (props.schedule&&props.schedule.length) {
     return (
       <div style={{ marginTop: 20 }} className="mt-5 mb-5">
         <table className="table">
