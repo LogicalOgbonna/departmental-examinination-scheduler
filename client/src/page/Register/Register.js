@@ -119,7 +119,8 @@ class Register extends Component {
                       to="/login"
                       className=" mt-3"
                     >
-                      I don't have an account
+                      
+                      I already have an account
                     </Link>
                   </div>
                   <div className="col-md-6">

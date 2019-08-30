@@ -2,6 +2,7 @@ import React from "react";
 import "./Table.css";
 
 export const CourseTable = props => {
+  console.log(props);
   return (
     <React.Fragment>
       <table className="table">

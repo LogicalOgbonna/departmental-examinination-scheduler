@@ -91,7 +91,7 @@ class Login extends Component {
                       to="/register"
                       className=" mt-3"
                     >
-                      I already have an account
+                      I don't have an account
                     </Link>
                   </div>
                   <div className="col-md-6">
