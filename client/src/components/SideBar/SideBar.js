@@ -11,7 +11,7 @@ function SideBar({ page, logout, admin }) {
       id="navigation"
     >
       <div className="logo">
-        <Link to="home.html">
+        <Link to="/">
           <img src={logo} alt="merkery_logo" className="hidden-xs hidden-sm" />
           <img
             src={logo}
@@ -60,12 +60,12 @@ function SideBar({ page, logout, admin }) {
                   <span className="hidden-xs hidden-sm">Complaints</span>
                 </Link>
               </li>
-              <li className={`${page === "settings" ? "active" : ""}`}>
+              {/* <li className={`${page === "settings" ? "active" : ""}`}>
                 <Link to="/settings">
                   <i className="fa fa-cog" aria-hidden="true" />
                   <span className="hidden-xs hidden-sm">Setting</span>
                 </Link>
-              </li>
+              </li> */}
             </React.Fragment>
           )}
 
