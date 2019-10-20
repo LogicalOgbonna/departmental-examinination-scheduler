@@ -17,6 +17,9 @@ class Lecturer extends React.Component {
   state = {
     name: "",
     code: "",
+    email: "",
+    password: "",
+    confirm_password: "",
     error: {}
   };
 
@@ -31,6 +34,13 @@ class Lecturer extends React.Component {
     if (next.createdLecturer && Object.keys(next.createdLecturer).length > 0) {
       this.props.clear();
       this.props.getLecturers();
+      this.setState({
+        name: "",
+        code: "",
+        email: "",
+        password: "",
+        confirm_password: ""
+      });
     }
   }
 
@@ -38,7 +48,11 @@ class Lecturer extends React.Component {
     const error = {};
     if (!data.name) error.name = "Can't be blank";
     if (!data.code) error.code = "Can't be blank";
-
+    if (!data.email) error.email = "Can't be blank";
+    if (!data.password) error.password = "Can't be blank";
+    if (!data.confirm_password) error.confirm_password = "Can't be blank";
+    if (data.password !== data.confirm_password)
+      error.password = "Password Does Not Match";
     return error;
   };
 
@@ -48,7 +62,6 @@ class Lecturer extends React.Component {
     this.setState({ error });
     if (Object.keys(error).length === 0) {
       this.props.postLecturers(this.state);
-      console.log(this.state);
     }
   };
   reload = () => {
@@ -76,14 +89,90 @@ class Lecturer extends React.Component {
                       )}
                     <form onSubmit={this.onSubmit} className="form-group">
                       <div className="form-group">
-                        <label htmlFor="name">Lecturer Name:</label>
+                        <label htmlFor="name">Name</label>
                         <input
                           type="text"
                           name="name"
-                          id="name"
                           className="form-control"
+                          id="name"
+                          aria-describedby="nameHelp"
+                          placeholder="Enter Full Name"
                           onChange={this.onChange}
+                          required
                         />
+                        {this.state.error && (
+                          <small
+                            id="nameHelp"
+                            className="form-text text-danger"
+                          >
+                            {this.state.error.name}
+                          </small>
+                        )}
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="email">Email address</label>
+                        <input
+                          type="email"
+                          name="email"
+                          className="form-control"
+                          id="email"
+                          aria-describedby="emailHelp"
+                          placeholder="Enter email"
+                          onChange={this.onChange}
+                          required
+                        />
+                        {this.state.error && (
+                          <small
+                            id="emailHelp"
+                            className="form-text text-danger"
+                          >
+                            {this.state.error.email}
+                          </small>
+                        )}
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                          type="password"
+                          name="password"
+                          className="form-control"
+                          id="password"
+                          placeholder="Password"
+                          onChange={this.onChange}
+                          required
+                        />
+                        {this.state.error && (
+                          <small
+                            id="emailHelp"
+                            className="form-text text-danger"
+                          >
+                            {this.state.error.password}
+                          </small>
+                        )}
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="confirm_password">
+                          Confirm Password
+                        </label>
+                        <input
+                          type="password"
+                          name="confirm_password"
+                          className="form-control"
+                          id="confirm_password"
+                          placeholder="Retype Password"
+                          onChange={this.onChange}
+                          required
+                        />
+                        {this.state.error && (
+                          <small
+                            id="emailHelp"
+                            className="form-text text-danger"
+                          >
+                            {this.state.error.confirm_password}
+                          </small>
+                        )}
                       </div>
 
                       {this.props.courses.length > 0 && (
@@ -94,6 +183,7 @@ class Lecturer extends React.Component {
                             className="form-control"
                             id="code"
                             onChange={this.onChange}
+                            required
                           >
                             <option value="">Select...</option>
                             {this.props.courses.map(course => (
@@ -102,6 +192,14 @@ class Lecturer extends React.Component {
                               </option>
                             ))}
                           </select>
+                          {this.state.error && (
+                            <small
+                              id="emailHelp"
+                              className="form-text text-danger"
+                            >
+                              {this.state.error.code}
+                            </small>
+                          )}
                         </div>
                       )}
 

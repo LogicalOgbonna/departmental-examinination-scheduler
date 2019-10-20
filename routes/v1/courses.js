@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Courses = require("../../models/Courses");
 const Lecturers = require("../../models/Lecturer");
+const passport = require("passport");
 
 router.post("/", (req, res, next) => {
   Courses.findOne({ code: req.body.code }).then(course => {
@@ -23,15 +24,19 @@ router.post("/", (req, res, next) => {
   });
 });
 
-router.get("/", (req, res, next) => {
-  Courses.find({}).then(courses => {
-    if (courses.length) {
-      return res.json(courses);
-    } else {
-      return res.json([]);
-    }
-  });
-});
+router.get(
+  "/",
+  // passport.authenticate("jwt", { session: false }),
+  (req, res, next) => {
+    Courses.find({}).then(courses => {
+      if (courses.length) {
+        return res.json(courses);
+      } else {
+        return res.json([]);
+      }
+    });
+  }
+);
 
 router.get("/:id", (req, res, next) => {
   Courses.findById(req.params.id).then(courses => {

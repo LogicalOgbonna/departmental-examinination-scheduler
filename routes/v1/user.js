@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const validation = require("../../validation/general-validation");
 
 //Models
-const User = require("../../models/User");
+const Admin = require("../../models/User");
 
 /* POST route creates a user. */
 router.post("/auth/signup", (req, res, next) => {
@@ -15,7 +15,7 @@ router.post("/auth/signup", (req, res, next) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
-  User.findOne({ email: req.body.email }).then(user => {
+  Admin.findOne({ email: req.body.email }).then(user => {
     if (user) {
       return res
         .status(400)
@@ -27,13 +27,12 @@ router.post("/auth/signup", (req, res, next) => {
         d: "mm" // Default
       });
       const admin = req.body.admin ? req.body.admin : false;
-      const newUser = new User({
+      const newUser = new Admin({
         // name: req.body.name,
         email: req.body.email,
         avatar,
         password: req.body.password,
         admin,
-        reason: req.body.reason
       });
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(req.body.password, salt, (err, hash) => {
@@ -71,7 +70,7 @@ router.post("/auth/signin", (req, res, next) => {
   const password = req.body.password;
 
   // Find user by email
-  User.findOne({ email }).then(user => {
+  Admin.findOne({ email }).then(user => {
     // Check for user
     if (!user) {
       errors.email = "email or password not correct";
@@ -110,7 +109,7 @@ router.get("/auth/current/:id", (req, res, next) => {
     return res.status(400).json(errors);
   }
 
-  User.findById(req.params.id).then(user => res.json(user));
+  Admin.findById(req.params.id).then(user => res.json(user));
   // res.json(req.body);
 });
 module.exports = router;

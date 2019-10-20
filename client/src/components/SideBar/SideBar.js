@@ -1,57 +1,99 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../images/Lineage_OS_Logo.png";
+import { connect } from "react-redux";
+import { logout } from "../../actions/auth";
 
-export default function SideBar({ page }) {
+function SideBar({ page, logout, admin }) {
   return (
     <div
       className="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box"
       id="navigation"
     >
       <div className="logo">
-        <a href="home.html">
+        <Link to="home.html">
           <img src={logo} alt="merkery_logo" className="hidden-xs hidden-sm" />
           <img
             src={logo}
             alt="merkery_logo"
             className="visible-xs visible-sm circle-logo"
           />
-        </a>
+        </Link>
       </div>
       <div className="navi">
         <ul>
           <li className={`${page === "home" ? "active" : ""}`}>
-            <a href="/dashboard">
+            <Link to="/dashboard">
               <i className="fa fa-home" aria-hidden="true" />
               <span className="hidden-xs hidden-sm">Home</span>
-            </a>
+            </Link>
           </li>
-          <li className={`${page === "courses" ? "active" : ""}`}>
-            <a href="/courses">
-              <i className="fa fa-tasks" aria-hidden="true" />
-              <span className="hidden-xs hidden-sm">Courses</span>
-            </a>
-          </li>
-          <li className={`${page === "lecturers" ? "active" : ""}`}>
-            <a href="/lecturers">
-              <i className="fa fa-bar-chart" aria-hidden="true" />
-              <span className="hidden-xs hidden-sm">Lecturers</span>
-            </a>
-          </li>
-          <li className={`${page === "scheduler" ? "active" : ""}`}>
-            <a href="/scheduler">
-              <i className="fa fa-calendar" aria-hidden="true" />
-              <span className="hidden-xs hidden-sm">Scheduler</span>
-            </a>
-          </li>
-          <li className={`${page === "settings" ? "active" : ""}`}>
-            <a href="/settings">
-              <i className="fa fa-cog" aria-hidden="true" />
-              <span className="hidden-xs hidden-sm">Setting</span>
-            </a>
+          {admin && (
+            <React.Fragment>
+              <li className={`${page === "courses" ? "active" : ""}`}>
+                <Link to="/courses">
+                  <i className="fa fa-tasks" aria-hidden="true" />
+                  <span className="hidden-xs hidden-sm">Courses</span>
+                </Link>
+              </li>
+              <li className={`${page === "lecturers" ? "active" : ""}`}>
+                <Link to="/lecturers">
+                  <i className="fa fa-bar-chart" aria-hidden="true" />
+                  <span className="hidden-xs hidden-sm">Lecturers</span>
+                </Link>
+              </li>
+              <li className={`${page === "halls" ? "active" : ""}`}>
+                <Link to="/halls">
+                  <i className="fa fa-institution" aria-hidden="true" />
+                  <span className="hidden-xs hidden-sm">Halls</span>
+                </Link>
+              </li>
+              <li className={`${page === "scheduler" ? "active" : ""}`}>
+                <Link to="/scheduler">
+                  <i className="fa fa-calendar" aria-hidden="true" />
+                  <span className="hidden-xs hidden-sm">Scheduler</span>
+                </Link>
+              </li>
+              <li className={`${page === "complaints" ? "active" : ""}`}>
+                <Link to="/complaints">
+                  <i className="fa fa-paste" aria-hidden="true" />
+                  <span className="hidden-xs hidden-sm">Complaints</span>
+                </Link>
+              </li>
+              <li className={`${page === "settings" ? "active" : ""}`}>
+                <Link to="/settings">
+                  <i className="fa fa-cog" aria-hidden="true" />
+                  <span className="hidden-xs hidden-sm">Setting</span>
+                </Link>
+              </li>
+            </React.Fragment>
+          )}
+
+          {!admin && (
+            <li className={`${page === "complaints" ? "active" : ""}`}>
+              <Link to="/complaints">
+                <i className="fa fa-paste" aria-hidden="true" />
+                <span className="hidden-xs hidden-sm">Make a Complain</span>
+              </Link>
+            </li>
+          )}
+          <li>
+            <Link onClick={() => logout()} to="/">
+              <i className="fa fa-user-times" aria-hidden="true" />
+              <span className="hidden-xs hidden-sm">Logout</span>
+            </Link>
           </li>
         </ul>
       </div>
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  admin: state.user.user.admin
+});
+
+export default connect(
+  mapStateToProps,
+  { logout }
+)(SideBar);

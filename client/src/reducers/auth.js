@@ -8,7 +8,8 @@ import _ from "lodash";
 
 const initialState = {
   user: {},
-  isAuthenticated: false
+  isAuthenticated: false,
+  authError: {}
 };
 const User = (state = initialState, action = {}) => {
   switch (action.type) {

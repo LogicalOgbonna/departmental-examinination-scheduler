@@ -4,11 +4,15 @@ import lecturer from "./reducers/lecturer";
 import scheduler from "./reducers/scheduler";
 import setting from "./reducers/settings";
 import user from "./reducers/auth";
+import hall from "./reducers/halls";
+import complaint from "./reducers/complaints";
 
 export default combineReducers({
   course,
   lecturer,
   setting,
   scheduler,
-  user
+  user,
+  hall,
+  complaint
 });

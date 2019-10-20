@@ -4,6 +4,7 @@ export const POST_LECTURER = "POST_LECTURER";
 export const DELETE_LECTURER = "DELETE_LECTURER";
 export const VIEW_LECTURER = "VIEW_LECTURER";
 export const DELETE_LECTURER_COURSE = "DELETE_LECTURER_COURSE";
+export const LECTUREE_LOGGED_IN = "LECTUREE_LOGGED_IN";
 
 export const COURSES_ERROR = "COURSES_ERROR";
 export const GET_COURSES = "GET_COURSES";
@@ -24,3 +25,19 @@ export const USER_LOGGED_OUT = "USER_LOGGED_OUT";
 export const USER_CREATED = "USER_CREATED";
 
 export const AUTH_ERRORS = "AUTH_ERRORS";
+
+export const GET_HALLS = "GET_HALLS";
+export const HALLS_ERROR = "HALLS_ERROR";
+export const POST_HALLS = "POST_HALLS";
+export const DELETE_HALL = "DELETE_HALL";
+export const VIEW_HALL = "VIEW_HALL";
+
+export const GET_COMPLAINTS = "GET_COMPLAINTS";
+export const POST_COMPLAINTS = "POST_COMPLAINTS";
+export const DELETE_COMPLAINT = "DELETE_COMPLAINT";
+export const COMPLAINTS_ERROR = "COMPLAINTS_ERROR";
+export const REPLY_COMPLAINT = "REPLY_COMPLAINT";
+export const SELECT = "SELECT";
+export const ADD_TO_TEMP = "ADD_TO_TEMP";
+export const TIME = "TIME";
+export const DISPLAY_TABLE = "DISPLAY_TABLE";

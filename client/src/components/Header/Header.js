@@ -6,6 +6,17 @@ import { Link } from "react-router-dom";
 import { logout } from "../../actions/auth";
 
 function Header() {
+  const opensideBar = () => {
+    let element, name, arr;
+    element = document.getElementById("navigation");
+    name = "hidden-xs";
+    arr = element.className.split(" ");
+    if (arr.indexOf(name) === -1) {
+      element.className += " " + name;
+    } else {
+      element.classList.remove("hidden-xs");
+    }
+  };
   return (
     <div className="row">
       <header>
@@ -20,9 +31,9 @@ function Header() {
                 aria-expanded="false"
               >
                 <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar" />
-                <span className="icon-bar" />
-                <span className="icon-bar" />
+                <span onClick={() => opensideBar()} className="icon-bar" />
+                <span onClick={() => opensideBar()} className="icon-bar" />
+                <span onClick={() => opensideBar()} className="icon-bar" />
               </button>
             </div>
           </nav>

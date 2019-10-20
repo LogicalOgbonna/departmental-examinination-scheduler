@@ -85,7 +85,6 @@ export const deleteLecturerCourse = (lec_id, cos_id) => dispatch => {
   // }
   console.log(cos_id);
   axios.post("/api/lecturers/deleteCourse", { lec_id, cos_id }).then(res => {
-    console.log(res.data);
     dispatch(deletedLecturerCourse(res.data));
   });
 };

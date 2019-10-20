@@ -45,7 +45,6 @@ export const login = user => dispatch => {
             admin: user.data.admin,
             email: user.data.email,
             avatar: user.data.avatar,
-            reason: user.data.reason,
             id: user.data._id
           })
         );
@@ -81,6 +80,47 @@ export const register = user => dispatch => {
     .catch(error => {
       error.response && dispatch(errors(error.response.data));
     });
+};
+
+export const lecturerLogin = data => dispatch => {
+  axios.post("/api/lecturers/login", data).then(lecturer => {
+    const token = lecturer.data.token;
+    localStorage.cost = JSON.stringify(token);
+    const currentlecturer = jwtDecode(token);
+    axios.get(`/api/lecturers/${currentlecturer.id}`).then(lecturer => {
+      setAuthorizationHeader(token);
+      dispatch(
+        userLoggedIn({
+          courses: lecturer.data.courses,
+          email: lecturer.data.email,
+          avatar: lecturer.data.avatar,
+          id: lecturer.data._id
+        })
+      );
+      history.push("/dashboard");
+    });
+    // console.log()
+  });
+};
+
+export const LecturerRegister = data => dispatch => {
+  axios.post("/api/lecturers", data).then(lecturer => {
+    const token = lecturer.data.token;
+    localStorage.cost = JSON.stringify(token);
+    const currentlecturer = jwtDecode(token);
+    axios.get(`/api/lecturers/${currentlecturer.id}`).then(lecturer => {
+      setAuthorizationHeader(token);
+      dispatch(
+        userLoggedIn({
+          courses: lecturer.data.courses,
+          email: lecturer.data.email,
+          avatar: lecturer.data.avatar,
+          id: lecturer.data._id
+        })
+      );
+      history.push("/dashboard");
+    });
+  });
 };
 
 export const logout = () => dispatch => {

@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const passport = require("passport");
 const Settings = require("../../models/Settings");
 
 router.post("/", (req, res, next) => {
@@ -29,13 +30,17 @@ router.post("/", (req, res, next) => {
   });
 });
 
-router.get("/", (req, res, next) => {
-  Settings.find({}).then(setting => {
-    if (setting.length) {
-      res.json(setting);
-    } else {
-      res.json({ settings: "No settings set" });
-    }
-  });
-});
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res, next) => {
+    Settings.find({}).then(setting => {
+      if (setting.length) {
+        res.json(setting);
+      } else {
+        res.json({ settings: "No settings set" });
+      }
+    });
+  }
+);
 module.exports = router;

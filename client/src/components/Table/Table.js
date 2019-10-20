@@ -1,8 +1,8 @@
 import React from "react";
 import "./Table.css";
+import Moment from "react-moment";
 
 export const CourseTable = props => {
-  console.log(props);
   return (
     <React.Fragment>
       <table className="table">
@@ -35,6 +35,60 @@ export const CourseTable = props => {
                   </button>
                   <button
                     onClick={() => props.deleteCourse(course._id)}
+                    style={{ margin: 3 }}
+                    className="m-3 btn btn-danger btn-sm"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <th scope="row" />
+              <td />
+              <td />
+              <td />
+              <td />
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </React.Fragment>
+  );
+};
+
+export const HallTable = props => {
+  return (
+    <React.Fragment>
+      <table className="table">
+        <thead className="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Capacity</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.halls && props.halls.length > 0 ? (
+            props.halls.map((hall, index) => (
+              <tr key={hall._id}>
+                <th scope="row">{index + 1}</th>
+                <td>{hall.name}</td>
+                <td>{hall.numberOfStudents}</td>
+                <td>
+                  <button
+                    onClick={() => props.viewHall(hall._id)}
+                    style={{ margin: 3 }}
+                    className="m-3 btn btn-secondary btn-sm"
+                    data-toggle="modal"
+                    data-target="#hall_modal"
+                  >
+                    View
+                  </button>
+                  <button
+                    onClick={() => props.deleteHall(hall._id)}
                     style={{ margin: 3 }}
                     className="m-3 btn btn-danger btn-sm"
                   >
@@ -115,6 +169,7 @@ export const LecturerTable = props => {
 };
 
 export const ScheduleTabel = props => {
+  console.log(props.schedule);
   if (props.schedule && props.schedule.length) {
     return (
       <div style={{ marginTop: 20 }} className="mt-5 mb-5">
@@ -126,7 +181,9 @@ export const ScheduleTabel = props => {
               <th scope="col">Title</th>
               <th scope="col">Lecturers</th>
               <th scope="col">No. of Students</th>
-              <th scope="col">Max No. of Invigilators </th>
+              <th scope="col">Hall Name</th>
+              <th scope="col">Hall Capacity</th>
+              <th scope="col">Date</th>
             </tr>
           </thead>
           <tbody>
@@ -134,17 +191,53 @@ export const ScheduleTabel = props => {
               props.schedule.map((schedule, index) => (
                 <tr key={schedule._id}>
                   <th scope="row">{index + 1}</th>
-                  <td>{schedule.code}</td>
-                  <td>{schedule.title}</td>
                   <td>
-                    {schedule.lecturer.map((lecturer, index) => (
-                      <p key={index} className="text-muted">
-                        {lecturer}
+                    {schedule.courses.map(course => (
+                      <p key={course._id} className="text-muted">
+                        {course.code}
                       </p>
                     ))}
                   </td>
-                  <td>{schedule.numberOfStudents}</td>
-                  <td>{schedule.numOfLecToInvigilate}</td>
+                  <td>
+                    {schedule.courses.map(course => (
+                      <p key={course._id} className="text-muted">
+                        {course.title}
+                      </p>
+                    ))}
+                  </td>
+                  <td>
+                    {schedule.lecturers.map((lecturer, index) => (
+                      <p key={index} className="text-muted">
+                        <span className="font-style-bold">{index + 1}:</span>{" "}
+                        {lecturer.name}
+                      </p>
+                    ))}
+                  </td>
+                  <td>
+                    {schedule.courses.map(course => (
+                      <p key={course._id} className="text-muted">
+                        {course.numberOfStudents}
+                      </p>
+                    ))}
+                  </td>
+                  <td>
+                    {schedule.halls.map(hall => (
+                      <p key={hall._id} className="text-muted">
+                        {hall.name}
+                      </p>
+                    ))}
+                  </td>
+                  <td>
+                    {schedule.halls.map(hall => (
+                      <p key={hall._id} className="text-muted">
+                        {hall.numberOfStudents}
+                      </p>
+                    ))}
+                  </td>
+                  {/* <td>{schedule.date.split("T")[0]}</td> */}
+                  <td>
+                    <Moment date={schedule.date} />
+                  </td>
                 </tr>
               ))
             ) : (
@@ -157,6 +250,25 @@ export const ScheduleTabel = props => {
             )}
           </tbody>
         </table>
+        <div className="row">
+          <div className="col-md-4">
+            <button className="btn btn-primary " onClick={props.onSave}>
+              Save
+            </button>
+          </div>
+          <div className="col-md-4"></div>
+          <div className="col-md-4" onClick={props.onPrint}>
+            <button className="btn btn-primary pull-right">Print</button>
+          </div>
+          <div className="col-md-12">
+            <h4
+              className="text-center m-5"
+              style={{ color: "red", fontStyle: "italic" }}
+            >
+              By saving, You Make the Time Table Visible to Lecturers
+            </h4>
+          </div>
+        </div>
       </div>
     );
   } else {

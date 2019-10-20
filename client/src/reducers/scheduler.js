@@ -1,6 +1,20 @@
-import { GET_SCHEDULE, GET_DETAILS, SCHEDULER_ERROR } from "../actions/types";
+import {
+  GET_SCHEDULE,
+  GET_DETAILS,
+  SCHEDULER_ERROR,
+  SELECT,
+  TIME,
+  DISPLAY_TABLE
+} from "../actions/types";
 
-const scheduler = (state = {}, action = {}) => {
+const initialState = {
+  timeTable: [],
+  time: "",
+  tempTable: [],
+  emptyErrors: {},
+  session: ""
+};
+const scheduler = (state = initialState, action = {}) => {
   switch (action.type) {
     case GET_SCHEDULE:
       return {
@@ -16,6 +30,23 @@ const scheduler = (state = {}, action = {}) => {
       return {
         ...state,
         schedulerError: action.payload
+      };
+    case SELECT:
+      state.tempTable[action.payload.type] = action.payload.data;
+      return {
+        ...state,
+        state
+      };
+    case TIME:
+      return {
+        ...state,
+        time: action.payload
+      };
+    case DISPLAY_TABLE:
+      return {
+        ...state,
+        timeTable: action.payload.tempTable,
+        session: action.payload.session
       };
     default:
       return state;
